@@ -6,12 +6,27 @@
 
   - name: Verificación de Pre-Requicitos para BBB - en.US.UTF-8
     ansible.builtin.shell: cat /etc/default/locale
+    register: utf
+
+  - name: Imprimiendo resultados del sistema -en.US.UTF-8
+    ansible.builtin.debug:
+      msg: El sistema cuenta con codigo de lenguaje {{ utf.stdout }} 
 
   - name: Verificación de Pre-Requicitos para BBB - LANG=en_US.UTF-8
-    ansible.builtin.shell: systemctl show-environment 
+    ansible.builtin.shell: systemctl show-environment
+    register: utf2
+
+  - name: Imprimiendo resultados del sistema - en.US.UTF-8
+    ansible.builtin.debug:
+      msg: El sistema cuenta con lenguaje {{ utf2.stdout }} 
 
   - name: Verificación de Pre-Requicitos para BBB - Al menos 8Gb libres
     ansible.builtin.shell: free -h
+    register: gb
+
+  - name: Imprimiendo resultados del sistema - 8Gb
+    ansible.builtin.debug:
+      msg: El sistema cuenta con {{ gb.stdout_lines }} 
 
   - name: Verificación de Pre-Requicitos para BBB - Ubuntu 20.04
     ansible.builtin.shell: cat /etc/lsb-release
@@ -30,7 +45,8 @@
     
   - name: Verificación de Pre-Requicitos para BBB - Puertos 80 y 443
     ansible.builtin.shell: sudo ufw status
+    register: result
 
-  
+
 
   
