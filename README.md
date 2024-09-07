@@ -5,5 +5,5 @@ Laboratorio para Ansible sobre Ubuntu
 Este es un ejemplo para comprender mejor el uso de la tecnología de Ansible.
 
 ## Máquinas involucradas
- -Ansible control
- -BBB
+ - Ansible control
+ - BBB
