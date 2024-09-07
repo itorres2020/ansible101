@@ -1,0 +1,36 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Verificación de Pre-Requicitos para BBB - en.US.UTF-8
+    ansible.builtin.shell: cat /etc/default/locale
+
+  - name: Verificación de Pre-Requicitos para BBB - LANG=en_US.UTF-8
+    ansible.builtin.shell: systemctl show-environment 
+
+  - name: Verificación de Pre-Requicitos para BBB - Al menos 8Gb libres
+    ansible.builtin.shell: free -h
+
+  - name: Verificación de Pre-Requicitos para BBB - Ubuntu 20.04
+    ansible.builtin.shell: cat /etc/lsb-release
+  
+  - name: Verificación de Pre-Requicitos para BBB - Ark x86_64
+    ansible.builtin.shell: uname -m
+    
+  - name: Verificación de Pre-Requicitos para BBB - IPv6
+    ansible.builtin.shell: ip addr | grep inet6
+      
+  - name: Verificación de Pre-Requicitos para BBB - Kernel 5.x
+    ansible.builtin.shell: uname -r
+      
+  - name: Verificación de Pre-Requicitos para BBB - 8 CPUs
+    ansible.builtin.shell: grep -c ^processor /proc/cpuinfo
+    
+  - name: Verificación de Pre-Requicitos para BBB - Puertos 80 y 443
+    ansible.builtin.shell: sudo ufw status
+
+  
+
+  
