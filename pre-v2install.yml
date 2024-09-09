@@ -1,0 +1,35 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Verificación de Pre-requicitos para BBB - en_US.UTF-8
+    debug:
+      msg: "La coficación actual es: {{ ansible_env.LANG }}"
+    when: ansible_env.LANG == 'en_US.UTF-8' 
+  
+  - name: Verificación de Pre-requicitos para BBB - 8Gb RAM
+    debug:
+      msg: "Actualmente el sistema cuenta con : {{ ansible_memtotal_mb }} MB"
+    when: ansible_memtotal_mb | int >= 8192
+  
+  - name: Verificación de Pre-requicitos para BBB - Ubuntu is 20.04 
+    debug:
+      msg: "La version instalada es: {{ ansible_lsb.release }}"
+    when: ansible_lsb.release == '20.04'
+
+  - name: Verificación de Pre-requicitos para BBB - x86_64
+    debug:
+      msg: "La version instalada es: {{ ansible_machine }}"
+    when: ansible_machine == 'x86_64'
+  
+  - name: Verificación de Pre-requicitos para BBB - IPv6
+    debug:
+      msg: "La version instalada es: {{ ipv6 }}"
+    when: ipv6 is defined
+
+  - name: Verificación de Pre-requicitos para BBB - Kernel 5.x
+    debug:
+      msg: "La version instalada es: {{ ansible_kernel }}"
+    when: ansible_kernel == '5.4.0-193-generic'
