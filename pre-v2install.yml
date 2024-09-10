@@ -12,7 +12,7 @@
   - name: Verificación de Pre-requicitos para BBB - 8Gb RAM
     debug:
       msg: "Actualmente el sistema cuenta con : {{ ansible_memtotal_mb }} MB"
-    when: ansible_memtotal_mb | int >= 8192
+    when: ansible_memtotal_mb | int >= 8191
   
   - name: Verificación de Pre-requicitos para BBB - Ubuntu is 20.04 
     debug:
@@ -33,3 +33,17 @@
     debug:
       msg: "La version instalada es: {{ ansible_kernel }}"
     when: ansible_kernel == '5.4.0-193-generic'
+
+  - name: Verificación de Pre-requicitos para BBB - vCPUs
+    debug:
+      msg: "Actualmente el sistema cuenta con : {{ ansible_processor_vcpus }} vCPUs"
+    when: ansible_processor_vcpus | int >= 8
+
+  - name: Generación de Pre-Requicitos para BBB - Puertos 80 y 443
+    ansible.builtin.shell: sudo ufw status
+    register: sfw
+
+  - name: A continuación se muestra la configuración del fw
+    debug:
+      msg: "{{sfw.stdout}}"
+     
