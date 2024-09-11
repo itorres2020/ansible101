@@ -32,7 +32,7 @@
   - name: Verificación de Pre-requicitos para BBB - Kernel 5.x
     debug:
       msg: "La version instalada es: {{ ansible_kernel }}"
-    when: ansible_kernel == '5.4.0-193-generic'
+    when: ansible_kernel == '5.4.0-195-generic'
 
   - name: Verificación de Pre-requicitos para BBB - vCPUs
     debug:
@@ -45,5 +45,4 @@
 
   - name: A continuación se muestra la configuración del fw
     debug:
-      msg: "{{sfw.stdout}}"
-     
+      msg: "{{ sfw.stdout }}"

@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Actualizacion de paquetes en SO
+      apt:
+        name: '*'
+        state: latest
+        update_cache: yes
+
+    - name: Comando repositorio de BBB a carpeta de /tmp/bbb
+      ansible.builtin.git:
+        repo: https://github.com/bigbluebutton/bbb-install.git
+        dest: /tmp/bbb
+        depth: 1
+        version: v2.7.x-release
+
+    - name: Instalación de BBB server
+      ansible.builtin.shell: wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v2.7.x-release/bbb-install.sh | bash -s -- -v focal-270 -s bbb.mania.ddns.net -e jitr45@gmail.com -g
